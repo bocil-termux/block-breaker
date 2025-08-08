@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Blockbast - Modern Block Breaker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="menu-screen" id="menuScreen">
+            <div class="logo">BLOCK BREAKER</div>
+            <button type="button" class="btn btn-primary" id="arcadeModeBtn">
+                <span>🏆 Arcade Mode</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="levelSelectBtn">
+                <span>📶 Level Select</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="highScoreBtn">
+                <span>🏅 High Scores</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="infoBtn">
+                <span>ℹ️ How to Play</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="settingsBtn">
+                <span>⚙️ Settings</span>
+            </button>
+            </div
+        </div>
+        <div class="level-select-screen" id="levelSelectScreen">
+            <div class="settings-header">
+                <div class="settings-title">Select Level</div>
+                <button type="button" class="back-btn" id="backFromLevelSelect">
+                    <span>← Back</span>
+                </button>
+            </div>
+            <div class="levels-container" id="levelsContainer"></div>
+        </div>
+        <div class="info-screen" id="infoScreen">
+            <div class="settings-header">
+                <div class="settings-title">How to Play</div>
+                <button type="button" class="back-btn" id="backFromInfo">
+                    <span>← Back</span>
+                </button>
+            </div>
+            <div class="info-content">
+                <p>Destroy all blocks to advance to the next level!</p>
+                <div class="info-item">
+                    <div class="info-color" style="background: #667eea;"></div>
+                    <div>Paddle - Move with arrow keys or swipe</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-color" style="background: #ffffff;"></div>
+                    <div>Ball - Bounce to break blocks</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-color" style="background: #555555;"></div>
+                    <div>Indestructible - Cannot be broken</div>
+                </div>
+                <h3>Powerups:</h3>
+                <div class="info-item">
+                    <div class="info-color" style="background: #a78bfa;"></div>
+                    <div>Multi Ball - Adds 2 new balls</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-color" style="background: #f87171;"></div>
+                    <div>Fire Ball - Destroys blocks in one hit</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-color" style="background: #4ade80;"></div>
+                    <div>Extra Ball - Adds 1 new ball</div>
+                </div>
+            </div>
+        </div>
+        <div class="settings-screen" id="settingsScreen">
+            <div class="settings-header">
+                <div class="settings-title">Settings</div>
+                <button type="button" class="back-btn" id="backFromSettings">
+                    <span>← Back</span>
+                </button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label">Dark Mode</div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label">Sound Effects</div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="soundToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label">Vibration</div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="vibrationToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="high-score-screen" id="highScoreScreen">
+            <div class="settings-header">
+                <div class="settings-title">High Scores</div>
+                <button type="button" class="back-btn" id="backFromHighScore">
+                    <span>← Back</span>
+                </button>
+            </div>
+            <div class="score-tabs">
+                <button type="button" class="score-tab active" data-mode="arcade">Arcade</button>
+                <button type="button" class="score-tab" data-mode="challenge">Challenge</button>
+            </div>
+            <div id="scoresList"></div>
+            <button type="button" class="btn btn-secondary" id="clearScoresBtn" style="margin-top: 20px;">
+                Clear Scores
+            </button>
+        </div>
+        <div class="game-container" id="gameContainer">
+           <div class="ui-header" id="uiHeader">
+                <button type="button" class="menu-btn" id="menuBtn">☰</button>
+                <div class="score-info" id="scoreContainer">Score: <span id="score">0</span></div>
+                <div class="level-info">Level: <span id="level">1</span></div>
+            </div>
+            <canvas id="gameCanvas" width="480" height="800"></canvas>
+        </div>
+        <div class="game-overlay" id="gameOverlay">
+            <div class="overlay-content" id="overlayContent">
+                <h2 class="overlay-title" id="overlayTitle">Game Over</h2>
+                <p class="overlay-subtitle" id="overlaySubtitle">Your score: 0</p>
+                <div id="nameInputContainer" style="display: none; width: 100%; margin-bottom: 15px;">
+                    <input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="10" 
+                           style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #667eea;">
+                </div>
+                <div class="overlay-buttons" id="overlayButtons">
+                    <button type="button" class="btn btn-primary" id="continueBtn">Continue</button>
+                    <button type="button" class="btn btn-secondary" id="restartBtn">Restart Level</button>
+                    <button type="button" class="btn btn-secondary" id="menuFromOverlayBtn">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
